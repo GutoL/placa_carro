@@ -10,7 +10,7 @@ def opencv(nome):
 	#cv2.imshow('edges',edges)
 	#cv2.waitKey(0)
 
-	minLineLength = 50
+	minLineLength = 100
 	maxLineGap = 10
 	lines = cv2.HoughLinesP(edges,1,np.pi/180,50,minLineLength,maxLineGap)
 	#print lines.shape
@@ -40,7 +40,7 @@ def opencv(nome):
 		print lines[(parallels[x][0])]
 		print lines[(parallels[x][1])]
 		print "--"'''
-	'''
+	
 	for x in xrange(len(parallels)):
 		v1 = lines[(parallels[x][0])]
 		v2 = lines[(parallels[x][1])]
@@ -49,7 +49,7 @@ def opencv(nome):
 		cv2.line(img,(v2[0],v2[1]),(v2[2],v2[3]),(0,255,0),3)
 
 	cv2.imshow('hough2',img)
-	cv2.waitKey(0)'''
+	cv2.waitKey(0)
 	#retangulo = lines[parallels[0][0]]
 	#print retangulo[0]
 	#roi = img[retangulo[1]:retangulo[3]+20,retangulo[0]:retangulo[2]]
@@ -131,7 +131,7 @@ def findEquationLine(lines,img):#lines,img
 
 def main():
 
-	opencv('images/placa7.jpg')
+	opencv('images/placa2.jpg')
 	'''arr = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
 	print arr
 	arr = np.delete(arr, 1, 0)
