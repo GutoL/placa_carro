@@ -20,30 +20,51 @@ def opencv(nome):
 
 	coefficients, indices_out = findEquationLine(lines,img) #lines, img
 
+
 	'''print 'numero linhas:%i'%len(lines)
 	print 'numero indices: %i'%len(indices_out)
 	print 'sub: %i'%(len(lines) - len(indices_out))'''
 
 	lines = remove_lines(lines,indices_out)
 
+	#print 'linhas: %i coe: %i'%(len(lines),len(coefficients))
+
 	#print "numero linhas: %i "%len(lines)
 
 	parallels = findParalell(coefficients)
 
+	findPerpendicular(coefficients,parallels)
 	'''for x in xrange(len(parallels)):
 		#print coefficients[parallels[x][0]]
 		#print coefficients[parallels[x][1]]
 		print lines[(parallels[x][0])]
 		print lines[(parallels[x][1])]
 		print "--"'''
-
+	'''
 	for x in xrange(len(parallels)):
-		v = lines[(parallels[x][0])]
-		cv2.line(img,(v[0],v[1]),(v[2],v[3]),(255,0,0),3)
+		v1 = lines[(parallels[x][0])]
+		v2 = lines[(parallels[x][1])]
+		#print 'p1: %i p2: %i'%((parallels[x][0]),(parallels[x][1]))
+		cv2.line(img,(v1[0],v1[1]),(v1[2],v1[3]),(255,0,0),3)
+		cv2.line(img,(v2[0],v2[1]),(v2[2],v2[3]),(0,255,0),3)
 
 	cv2.imshow('hough2',img)
-	cv2.waitKey(0)
+	cv2.waitKey(0)'''
+	#retangulo = lines[parallels[0][0]]
+	#print retangulo[0]
+	#roi = img[retangulo[1]:retangulo[3]+20,retangulo[0]:retangulo[2]]
+	#print roi
+	#roi = img[10:400,0:200]
+	#cv2.imshow('roi',roi)
+	#cv2.waitKey(0)
 
+def findPerpendicular(coefficients,parallels):
+	perpendicular = []
+	l1 = []
+	l1 = []
+
+	for x in coefficients:
+		print x
 
 
 def remove_lines(lines,indices_out):
