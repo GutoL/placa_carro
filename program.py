@@ -10,9 +10,9 @@ def opencv(nome):
 	#cv2.imshow('edges',edges)
 	#cv2.waitKey(0)
 
-	minLineLength = 100
+	minLineLength = 50
 	maxLineGap = 10
-	lines = cv2.HoughLinesP(edges,1,np.pi/180,50,minLineLength,maxLineGap)
+	lines = cv2.HoughLinesP(edges,1,np.pi/2,50,minLineLength,maxLineGap)
 	#print lines.shape
 	
 	lines = lines[0]
@@ -33,7 +33,8 @@ def opencv(nome):
 
 	parallels = findParalell(coefficients)
 
-	findPerpendicular(coefficients,parallels)
+	perpendicular = findPerpendicular(coefficients,parallels)
+	print len(perpendicular)
 	'''for x in xrange(len(parallels)):
 		#print coefficients[parallels[x][0]]
 		#print coefficients[parallels[x][1]]
@@ -50,6 +51,7 @@ def opencv(nome):
 
 	cv2.imshow('hough2',img)
 	cv2.waitKey(0)
+	
 	#retangulo = lines[parallels[0][0]]
 	#print retangulo[0]
 	#roi = img[retangulo[1]:retangulo[3]+20,retangulo[0]:retangulo[2]]
@@ -60,11 +62,17 @@ def opencv(nome):
 
 def findPerpendicular(coefficients,parallels):
 	perpendicular = []
-	l1 = []
-	l1 = []
+	
 
-	for x in coefficients:
-		print x
+	for x in xrange(len(coefficients)):
+		for y in parallels:
+			#print coefficients[y[0]]
+			if coefficients[x] != 0 and coefficients[y[0]] == (1.0/coefficients[x]):
+				temp = []
+				temp.append(y)
+				temp.append(x)
+				perpendicular.append(temp)
+	return perpendicular
 
 
 def remove_lines(lines,indices_out):
@@ -131,7 +139,7 @@ def findEquationLine(lines,img):#lines,img
 
 def main():
 
-	opencv('images/placa2.jpg')
+	opencv('images/placa8.jpg')
 	'''arr = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
 	print arr
 	arr = np.delete(arr, 1, 0)
